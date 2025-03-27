@@ -6,5 +6,5 @@ class Velociraptor(Animal):
     def __init__(self,pos) -> None:
         self.image = pygame.image.load(VELOCIRAPTOR_IMAGE)
         self.pos = pos
-        self.orientation = 90
+        self.orientation = 0
 
