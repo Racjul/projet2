@@ -2,7 +2,6 @@ from constants import *
 import pygame
 from animal import Animal
 from utility import Direction
-from thescelosaurus import Thescelosaurus
 
 class Velociraptor(Animal):
     def __init__(self,pos) -> None:

@@ -4,6 +4,7 @@ from constants import *
 import math
 import random 
 from utility import *
+
 class Animal(ABC):
     
     def __init__(self,pos) -> None:
