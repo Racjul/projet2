@@ -88,8 +88,7 @@ class Animal(ABC):
     def _find_wanted_angle(self,pos):
         return math.atan2(pos[1]-self._pos[1],pos[0]-self._pos[0])%(2*math.pi)
 
-    def _find_orientation(self,pos):
-        wanted_angle = self._find_wanted_angle(pos)
+    def _find_orientation(self,wanted_angle):
         if wanted_angle > self._orientation:
             if wanted_angle - self._orientation < math.pi:
                 return Direction.RIGHT
@@ -101,7 +100,7 @@ class Animal(ABC):
             else:
                 return Direction.RIGHT
     def _find_max_rotation(self):
-        return self.radius_of_rotation * self._velocity
+        return self._velocity/ self.radius_of_rotation 
 
     def _find_distance(self,pos):
         return math.sqrt((pos[0]-self._pos[0])**2 + (pos[1]-self._pos[1])**2)

@@ -2,7 +2,6 @@
 VELOCIRAPTOR_IMAGE = "images/velociraptor.png"
 THESCELOSAURUS_IMAGE = "images/thescellosaurus.png"
 
-
 #Simulation constants
 DT = 0.01
 EAT_DISTANCE = 2

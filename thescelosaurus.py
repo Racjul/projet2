@@ -2,12 +2,14 @@ from constants import *
 import pygame
 from animal import Animal
 from utility import *
+import random 
 
 class Thescelosaurus(Animal):
     def __init__(self,pos) -> None:
         super(Thescelosaurus,self).__init__(pos)
         self.image = pygame.image.load(THESCELOSAURUS_IMAGE)
         self.hunter_detected:bool = False
+        self._detect_distance = random.uniform(15,50)
 
     @property
     def radius_of_rotation(self):
@@ -22,16 +24,15 @@ class Thescelosaurus(Animal):
         return T_ACCELERATION
 
     def detect(self,animal:Animal):
-        #TODO
-        pass
+        return True if  self._find_distance(animal.pos) < self._detect_distance else False
 
     def __str__(self):
         return f"Thescelosaurus: \n Pos: {self.pos},\n Orientation: {self.orientation},\n Velocity: {self.velocity},\n Angular Velocity: {self.angular_velocity}\n----------------------------"
 
     def cycle(self, dt, animal):
         if not self.hunter_detected :
-            self.detect(animal)
+            self.hunter_detected = self.detect(animal)
         else:
-            #TODO
+            self._find_wanted_angle(animal.pos)
             self.accelerate(dt)
             self.move(dt)

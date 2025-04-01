@@ -20,7 +20,7 @@ class Velociraptor(Animal):
 
     def cycle(self, dt, animal):
         angle = self._find_wanted_angle(animal.pos)
-        direction= self._find_orientation(animal.pos)
+        direction= self._find_orientation(angle)
         self.angular_velocity = abs(self.orientation - angle)
         if direction== Direction.LEFT:
             self.orientation-=self.angular_velocity

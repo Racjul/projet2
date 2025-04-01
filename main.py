@@ -8,15 +8,17 @@ from thescelosaurus import Thescelosaurus
 
 if __name__ == "__main__":
     running = True
-    chasseur = Velociraptor([0,0])
-    proie = Thescelosaurus([100,100])
-    print(chasseur)
-    print(proie)
-
+    time = 0
+    hunter = Velociraptor([0,0])
+    prey = Thescelosaurus([100,100])
+    print(hunter)
+    print(prey)
     while running:
-        if chasseur.can_eat(proie.pos):
-            print("Velociraptor a mange Thescelosaurus")
+        hunter.cycle(1,prey)
+        prey.cycle(1,hunter)
+        time+=DT
+        if time == 100:
             running = False
-        
+
 
 
