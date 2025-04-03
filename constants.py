@@ -1,17 +1,27 @@
-#Image path
-VELOCIRAPTOR_IMAGE = "images/velociraptor.png"
-THESCELOSAURUS_IMAGE = "images/thescellosaurus.png"
-
 #Simulation constants
-DT = 0.01
-EAT_DISTANCE = 2
+EAT_DISTANCE = 4
 
 #Thescellosaurus constants
 T_MAX_VELOCITY = 50
-T_RADIUS_OF_ROTATION= 1.5
+T_RADIUS_OF_ROTATION= 0.5
 T_ACCELERATION = 5
 
 #Velociraptor constants
 V_MAX_VELOCITY = 60
 V_RADIUS_OF_ROTATION= 1.5
 V_ACCELERATION = 5
+
+
+#Pygame constants
+WIDTH = 1920
+HEIGHT = 1080
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+BLUE = (0, 0, 255)
+GREEN = (0,255,0)
+
+RADIUS = 2
+ARROW_HEAD_SIZE = 5
+ARROW_SIZE = 2
+ARROW_LENGHT = 10

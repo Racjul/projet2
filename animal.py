@@ -6,46 +6,51 @@ import random
 from utility import *
 
 class Animal(ABC):
-    
-    def __init__(self,pos) -> None:
-        self.__image =pygame.image.load(VELOCIRAPTOR_IMAGE)
+
+    def __init__(self,pos,orientation:float) -> None:
         self._pos = pos
-        self._orientation = float(0)
+        self._orientation = orientation
         self._velocity = float(0)
         self._angular_velocity =float(0)
 
-    
+
     @property
     def pos(self):
         return self._pos
     @property
     def orientation(self):
         return self._orientation
-  
+
     @property 
     def velocity(self):
         return self._velocity
     @property 
     def angular_velocity(self):
         return self._angular_velocity
-    
-    @property
-    @abstractmethod
-    def radius_of_rotation(self):
-        return float(0)
 
     @property
     @abstractmethod
-    def max_velocity(self):
-        return float(0)
+    def radius_of_rotation(self)->float:
+        pass
+
     @property
     @abstractmethod
-    def acceleration(self):
-        return float(0)
+    def isPrey(self)->bool:
+        pass
+
+    @property
+    @abstractmethod
+    def max_velocity(self)->float:
+        pass
+
+    @property
+    @abstractmethod
+    def acceleration(self)->float:
+        pass
 
     @orientation.setter
     def orientation(self,orientation):
-        self._orientation = orientation//2*math.pi
+        self._orientation = orientation%(2*math.pi)
 
     @angular_velocity.setter
     def angular_velocity(self,angular_velocity):
@@ -54,19 +59,11 @@ class Animal(ABC):
         else:
             self._angular_velocity = self._find_max_rotation()
 
-
     @abstractmethod
-    def __str__(self):
-        return f" Pos: {self.pos},\n Orientation: {self.orientation},\n Velocity: {self.velocity},\n Angular Velocity: {self.angular_velocity}\n----------------------------"
-
-    @abstractmethod
-    def cycle(self,dt,animal):
+    def __str__(self)->str:
         pass
 
-    def show(self,screen):
-        screen.blit(self.__image,self._pos)
-
-    def rotate(self,dt,direction:Direction):
+    def rotate(self,dt,direction):
         self._angular_velocity += math.pi/2 * dt
         if direction == Direction.RIGHT:
             self._angular_velocity += math.pi/2 * dt
@@ -104,6 +101,28 @@ class Animal(ABC):
 
     def _find_distance(self,pos):
         return math.sqrt((pos[0]-self._pos[0])**2 + (pos[1]-self._pos[1])**2)
+
+    # Function to draw the dot with an arrow
+    def draw_oriented_dot( self,surface):
+        if self.isPrey:
+            color = BLUE
+        else:
+            color= RED
+        x, y = self.pos
+        pygame.draw.circle(surface, color, (x, y), RADIUS)
+
+        arrow_x = x + ARROW_LENGHT * math.cos(self.orientation)
+        arrow_y = y + ARROW_LENGHT * math.sin(self.orientation)
+
+        pygame.draw.line(surface, BLACK, (x, y), (arrow_x, arrow_y), ARROW_SIZE)
+
+        angle1 = self.orientation+ math.pi * 5 / 6  
+        angle2 = self.orientation- math.pi * 5 / 6   
+        point1 = (arrow_x + ARROW_HEAD_SIZE * math.cos(angle1), arrow_y + ARROW_HEAD_SIZE * math.sin(angle1))
+        point2 = (arrow_x + ARROW_HEAD_SIZE * math.cos(angle2), arrow_y + ARROW_HEAD_SIZE * math.sin(angle2))
+
+        pygame.draw.polygon(surface, BLACK, [(arrow_x, arrow_y), point1, point2])
+
 
     
         
