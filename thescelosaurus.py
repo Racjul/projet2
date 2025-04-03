@@ -41,7 +41,16 @@ class Thescelosaurus(Animal):
 
     def __str__(self):
         return f"Thescelosaurus: \n Pos: {self.pos},\n Orientation: {self.orientation},\n Velocity: {self.velocity},\n Angular Velocity: {self.angular_velocity}\n----------------------------"
-            
+    def straight_line(self, dt, animal,surface=None):
+        if not self.hunter_detected :
+            if surface is not None:
+                pygame.draw.circle(surface, GREEN, (int(self.pos[0]),int(self.pos[1])), int(self.detect_distance))
+            is_detected = self.detect(animal)
+            self.hunter_detected = is_detected
+        else:
+            self.accelerate(dt)
+            self.move(dt)
+       
     def strat1(self, dt, animal,surface=None):
         if not self.hunter_detected :
             if surface is not None:

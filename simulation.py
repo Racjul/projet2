@@ -18,8 +18,7 @@ pos2 = [800,600]
 angle = 0
 print("Angle: ",angle)
 velociraptor = Velociraptor(pos1,angle)
-thescelosaurus = Thescelosaurus(pos2,angle)
-thescelosaurus.detect_distance = 50
+thescelosaurus = Thescelosaurus(pos2,angle+ math.pi/2)
 print(f"Thescelosaurus: ",thescelosaurus)
 print(f"Velociraptor: ",velociraptor)
 while running:
@@ -40,6 +39,7 @@ while running:
     #print(f"Delta Time: {dt:.4f} seconds")
 
     velociraptor.cycle(dt,thescelosaurus,screen)
+    thescelosaurus.straight_line(dt,velociraptor,screen)
     #thescelosaurus.strat1(dt,velociraptor,screen)
     pygame.display.flip()
 pygame.quit()
