@@ -26,5 +26,8 @@ class TestVelociraptor(unittest.TestCase):
         self.assertEqual(v._find_orientation(5*(math.pi/4)), Direction.LEFT)
         self.assertEqual(v._find_orientation(7*(math.pi)/4), Direction.RIGHT)
 
+    def test_fonctionx(self):
+        self.assertEqual(1,1)
+
 if __name__ == "__main__":
     unittest.main()
