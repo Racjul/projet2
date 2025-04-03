@@ -7,7 +7,7 @@ import random
 import pygame
 
 class Thescelosaurus(Animal):
-    def __init__(self,pos,orientation) -> None:
+    def __init__(self,pos,orientation=0) -> None:
         super(Thescelosaurus,self).__init__(pos,orientation)
         self.hunter_detected:bool = False
         self._detect_distance = random.uniform(15,50)

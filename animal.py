@@ -7,7 +7,7 @@ from utility import *
 
 class Animal(ABC):
 
-    def __init__(self,pos,orientation:float) -> None:
+    def __init__(self,pos,orientation:float=0) -> None:
         self._pos = pos
         self._orientation = orientation
         self._velocity = float(0)
@@ -88,14 +88,14 @@ class Animal(ABC):
     def _find_orientation(self,wanted_angle):
         if wanted_angle > self._orientation:
             if wanted_angle - self._orientation < math.pi:
-                return Direction.RIGHT
-            else:
                 return Direction.LEFT
+            else:
+                return Direction.RIGHT
         else:
             if self._orientation - wanted_angle < math.pi:
-                return Direction.LEFT
-            else:
                 return Direction.RIGHT
+            else:
+                return Direction.LEFT
     def _find_max_rotation(self):
         return self._velocity/ self.radius_of_rotation 
 

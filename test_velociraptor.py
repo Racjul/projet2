@@ -2,6 +2,7 @@ import unittest
 from velociraptor import Velociraptor
 from thescelosaurus import Thescelosaurus
 import math
+from utility import Direction
 
 class TestVelociraptor(unittest.TestCase):
 
@@ -21,7 +22,9 @@ class TestVelociraptor(unittest.TestCase):
         self.assertEqual(v._find_wanted_angle([2,1]),0)
 
     def test_findOri(self):
-        v = Velociraptor([1,1])
+        v = Velociraptor([1,1],math.pi/2)
+        self.assertEqual(v._find_orientation(5*(math.pi/4)), Direction.LEFT)
+        self.assertEqual(v._find_orientation(7*(math.pi)/4), Direction.RIGHT)
 
 if __name__ == "__main__":
     unittest.main()

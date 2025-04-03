@@ -3,7 +3,7 @@ from animal import Animal
 from utility import Direction, calculate_velocity, ending_screen 
 
 class Velociraptor(Animal):
-    def __init__(self,pos,orientation) -> None:
+    def __init__(self,pos,orientation=0) -> None:
         super(Velociraptor,self).__init__(pos,orientation)
 
     @property
