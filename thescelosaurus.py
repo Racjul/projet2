@@ -1,7 +1,7 @@
 from constants import *
 import pygame
 from animal import Animal
-from utility import Direction,calculate_velocity
+from utility import Direction,calculate_velocity, ending_screen,ending_screen1, inverseDirection
 import math
 import random 
 import pygame
@@ -11,6 +11,11 @@ class Thescelosaurus(Animal):
         super(Thescelosaurus,self).__init__(pos,orientation)
         self.hunter_detected:bool = False
         self._detect_distance = random.uniform(15,50)
+        self._rotated_distance = 0
+        self._rotating = False
+        self._able_to_rotate = True
+        self.totaldt =0
+        self.escaped = False 
 
     @property
     def radius_of_rotation(self):
@@ -37,7 +42,7 @@ class Thescelosaurus(Animal):
         return T_ACCELERATION
 
     def detect(self,animal:Animal):
-        return True if  self._find_distance(animal.pos) < self._detect_distance else False
+        return True if  self.find_distance(animal.pos) < self._detect_distance else False
 
     def __str__(self):
         return f"Thescelosaurus: \n Pos: {self.pos},\n Orientation: {self.orientation},\n Velocity: {self.velocity},\n Angular Velocity: {self.angular_velocity}\n----------------------------"
@@ -58,8 +63,35 @@ class Thescelosaurus(Animal):
             is_detected = self.detect(animal)
             self.hunter_detected = is_detected
         else:
+
+            distance = self.find_distance(animal.pos)
+
+            if  distance < T_RESET_DISTANCE and self._able_to_rotate and not self._rotating:
+                self._rotating = True
+                angle = self._find_wanted_angle(animal.pos)
+                #self._direction= inverseDirection(self._find_direction(angle))
+                self._direction= self._find_direction(angle)
+                print(self._direction)
+
+
+            elif  distance >= T_RESET_DISTANCE :
+                self._able_to_rotate = True
+
+            if(self._rotating):
+                self.angular_velocity = self.find_max_rotation()
+                self._rotated_distance += dt * self.angular_velocity
+                self.rotate(dt,self._direction)
+                if(self._rotated_distance >= 3  * math.pi/4):
+                    self._rotated_distance = 0
+                    self._rotating = False
+                    self._able_to_rotate = False
+                    print("Rotated")
+
             self.accelerate(dt)
-            if(self._find_distance(animal.pos) < 40):
-                self.orientation += self._find_max_rotation()* dt
             self.move(dt)
+            self.totaldt += dt
+            if(self.totaldt >=15):
+                if(surface is not None):
+                    ending_screen1(surface)
+                self.escaped = True
 

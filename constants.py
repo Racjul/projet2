@@ -1,10 +1,11 @@
 #Simulation constants
-EAT_DISTANCE = 4
+EAT_DISTANCE = 2
 
 #Thescellosaurus constants
 T_MAX_VELOCITY = 50/3.6
 T_RADIUS_OF_ROTATION= 0.5
 T_ACCELERATION = 5
+T_RESET_DISTANCE = 8
 
 #Velociraptor constants
 V_MAX_VELOCITY = 60/3.6

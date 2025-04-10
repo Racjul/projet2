@@ -23,8 +23,8 @@ class TestVelociraptor(unittest.TestCase):
 
     def test_findOri(self):
         v = Velociraptor([1,1],math.pi/2)
-        self.assertEqual(v._find_orientation(5*(math.pi/4)), Direction.LEFT)
-        self.assertEqual(v._find_orientation(7*(math.pi)/4), Direction.RIGHT)
+        self.assertEqual(v._find_direction(5*(math.pi/4)), Direction.LEFT)
+        self.assertEqual(v._find_direction(7*(math.pi)/4), Direction.RIGHT)
 
     def test_fonctionx(self):
         self.assertEqual(1,1)

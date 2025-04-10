@@ -54,22 +54,20 @@ class Animal(ABC):
 
     @angular_velocity.setter
     def angular_velocity(self,angular_velocity):
-        if (self._find_max_rotation() -angular_velocity >= 0):
+        if (self.find_max_rotation() -angular_velocity >= 0):
             self._angular_velocity = angular_velocity
         else:
-            self._angular_velocity = self._find_max_rotation()
+            self._angular_velocity = self.find_max_rotation()
 
     @abstractmethod
     def __str__(self)->str:
         pass
 
     def rotate(self,dt,direction):
-        self._angular_velocity += math.pi/2 * dt
         if direction == Direction.RIGHT:
-            self._angular_velocity += math.pi/2 * dt
-        else:
             self._orientation += self._angular_velocity * dt
-        self.orientation = self._orientation % 2*math.pi
+        else:
+            self._orientation -= self._angular_velocity * dt
 
     def move(self,dt):
         velocity = calculate_velocity(self._velocity,self._orientation)
@@ -85,7 +83,7 @@ class Animal(ABC):
     def _find_wanted_angle(self,pos):
         return math.atan2(pos[1]-self._pos[1],pos[0]-self._pos[0])%(2*math.pi)
 
-    def _find_orientation(self,wanted_angle):
+    def _find_direction(self,wanted_angle):
         if wanted_angle > self._orientation:
             if wanted_angle - self._orientation < math.pi:
                 return Direction.LEFT
@@ -96,10 +94,10 @@ class Animal(ABC):
                 return Direction.RIGHT
             else:
                 return Direction.LEFT
-    def _find_max_rotation(self):
+    def find_max_rotation(self):
         return self._velocity/ self.radius_of_rotation 
 
-    def _find_distance(self,pos):
+    def find_distance(self,pos):
         return math.sqrt((pos[0]-self._pos[0])**2 + (pos[1]-self._pos[1])**2)
 
     # Function to draw the dot with an arrow
