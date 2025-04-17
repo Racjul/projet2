@@ -86,14 +86,14 @@ class Animal(ABC):
     def _find_direction(self,wanted_angle):
         if wanted_angle > self._orientation:
             if wanted_angle - self._orientation < math.pi:
-                return Direction.LEFT
-            else:
                 return Direction.RIGHT
+            else:
+                return Direction.LEFT
         else:
             if self._orientation - wanted_angle < math.pi:
-                return Direction.RIGHT
-            else:
                 return Direction.LEFT
+            else:
+                return Direction.RIGHT
     def find_max_rotation(self):
         return self._velocity/ self.radius_of_rotation 
 
@@ -122,5 +122,3 @@ class Animal(ABC):
         pygame.draw.polygon(surface, BLACK, [(arrow_x, arrow_y), point1, point2])
 
 
-    
-        

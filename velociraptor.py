@@ -25,9 +25,9 @@ class Velociraptor(Animal):
         direction= self._find_direction(angle)
         self.angular_velocity = abs(self.orientation - angle)
         if direction== Direction.RIGHT:
-            self.orientation-=self.angular_velocity *dt
+            self.orientation+=self.angular_velocity *dt
         else:
-            self.orientation+=self.angular_velocity * dt
+            self.orientation-=self.angular_velocity * dt
         self.accelerate(dt)
         self.move(dt)
         if (self.can_eat(animal.pos)):

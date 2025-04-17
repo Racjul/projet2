@@ -17,12 +17,11 @@ running = True
 pygame.display.set_caption('Simulation projet 2')
 velociraptor_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 pos1 = [600,600]
-pos2 = [667,600]
+pos2 = [677,600]
 angle = 0
 print("Angle: ",angle)
 velociraptor = Velociraptor(pos1,angle)
 thescelosaurus = Thescelosaurus(pos2,angle)
-thescelosaurus.detect_distance = 30.29999999999972
 print(f"Thescelosaurus: ",thescelosaurus)
 print(f"Velociraptor: ",velociraptor)
 while running:
@@ -35,7 +34,6 @@ while running:
     screen.fill("white")
     thescelosaurus.draw_oriented_dot(screen)
     velociraptor.draw_oriented_dot(screen)
-
 
     # limits FPS to 60
     dt = clock.tick(60) / 1000

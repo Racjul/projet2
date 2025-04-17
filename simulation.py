@@ -16,12 +16,13 @@ running = True
 pygame.display.set_caption('Simulation projet 2')
 velociraptor_pos = pygame.Vector2(screen.get_width() / 2, screen.get_height() / 2)
 pos1 = [600,600]
-pos2 = [667,600]
+pos2 = [677,600]
 angle = 0
+DT  =0.016 
 print("Angle: ",angle)
 velociraptor = Velociraptor(pos1,angle)
 thescelosaurus = Thescelosaurus(pos2,angle)
-thescelosaurus.detect_distance = 30.29999999999972
+thescelosaurus.detect_distance = 28.5
 print(f"Thescelosaurus: ",thescelosaurus)
 print(f"Velociraptor: ",velociraptor)
 while running:
@@ -39,10 +40,9 @@ while running:
     # limits FPS to 60
     dt = clock.tick(60) / 1000
 
-    print(f"Delta Time: {dt:.4f} seconds")
 
-    velociraptor.cycle(dt,thescelosaurus,screen)
-    thescelosaurus.strat1(dt,velociraptor,screen)
+    velociraptor.cycle(DT,thescelosaurus,screen)
+    thescelosaurus.strat1(DT,velociraptor,screen)
     remaining_time = max(0, 15 - int(thescelosaurus.totaldt))
     countdown = font.render(str(remaining_time), True, (0,0,0))
     text_rect = countdown.get_rect(bottomright=(WIDTH - 20, HEIGHT - 20))

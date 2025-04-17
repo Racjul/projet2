@@ -1,11 +1,13 @@
+import math
 #Simulation constants
-EAT_DISTANCE = 2
+EAT_DISTANCE = 1
 
 #Thescellosaurus constants
 T_MAX_VELOCITY = 50/3.6
 T_RADIUS_OF_ROTATION= 0.5
 T_ACCELERATION = 5
-T_RESET_DISTANCE = 8
+T_RESET_DISTANCE = 2
+T_ROTATION_ANGLE = math.pi/4
 
 #Velociraptor constants
 V_MAX_VELOCITY = 60/3.6

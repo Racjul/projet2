@@ -16,6 +16,7 @@ class Thescelosaurus(Animal):
         self._able_to_rotate = True
         self.totaldt =0
         self.escaped = False 
+        self._wanted_angle = 0
 
     @property
     def radius_of_rotation(self):
@@ -68,9 +69,9 @@ class Thescelosaurus(Animal):
 
             if  distance < T_RESET_DISTANCE and self._able_to_rotate and not self._rotating:
                 self._rotating = True
-                angle = self._find_wanted_angle(animal.pos)
-                #self._direction= inverseDirection(self._find_direction(angle))
+                angle =  animal.orientation
                 self._direction= self._find_direction(angle)
+                self._wanted_angle =(T_ROTATION_ANGLE -abs(animal.orientation-self.orientation) )% (2*math.pi)
                 print(self._direction)
 
 
@@ -81,7 +82,7 @@ class Thescelosaurus(Animal):
                 self.angular_velocity = self.find_max_rotation()
                 self._rotated_distance += dt * self.angular_velocity
                 self.rotate(dt,self._direction)
-                if(self._rotated_distance >= 3  * math.pi/4):
+                if(self._rotated_distance >= self._wanted_angle):
                     self._rotated_distance = 0
                     self._rotating = False
                     self._able_to_rotate = False
