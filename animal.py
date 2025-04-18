@@ -100,7 +100,6 @@ class Animal(ABC):
     def find_distance(self,pos):
         return math.sqrt((pos[0]-self._pos[0])**2 + (pos[1]-self._pos[1])**2)
 
-    # Function to draw the dot with an arrow
     def draw_oriented_dot( self,surface):
         if self.isPrey:
             color = BLUE

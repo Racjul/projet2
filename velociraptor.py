@@ -1,6 +1,6 @@
 from constants import *
 from animal import Animal
-from utility import Direction, calculate_velocity, ending_screen 
+from utility import Direction, calculate_velocity, display_predator_win 
 
 class Velociraptor(Animal):
     def __init__(self,pos,orientation=0) -> None:
@@ -20,7 +20,7 @@ class Velociraptor(Animal):
     def isPrey(self):
         return False
 
-    def cycle(self, dt, animal,screen=None):
+    def strat_part1(self, dt, animal,screen=None):
         angle = self._find_wanted_angle(animal.pos)
         direction= self._find_direction(angle)
         self.angular_velocity = abs(self.orientation - angle)
@@ -32,7 +32,7 @@ class Velociraptor(Animal):
         self.move(dt)
         if (self.can_eat(animal.pos)):
             if(screen is not None):
-                ending_screen(screen)
+                display_predator_win(screen)
             self.eat = True
 
 
