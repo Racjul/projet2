@@ -16,8 +16,8 @@ def run_simulation(detect_distance=None):
     pygame.display.set_caption('Simulation projet 2  - partie 2')
 
     # Initialize positions and objects
-    pos_predator_A = [600, 650]
-    pos_predator_B = [600, 550]
+    pos_predator_A = [600, 792]
+    pos_predator_B = [600, 408]
     pos_prey = [677, 600]
     dt=0.016
     angle = angle_between_points(pos_predator_A, pos_prey)

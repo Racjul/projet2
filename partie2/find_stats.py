@@ -6,7 +6,7 @@ from pandas import DataFrame
 from matplotlib import pyplot as plt
 
 
-def simulate_and_plot(distance_between_predators=100):
+def simulate_and_plot(distance_between_predators=100,plot=True):
     running = True
     
 # Initialize positions and objects
@@ -58,16 +58,31 @@ def simulate_and_plot(distance_between_predators=100):
     # Plot the results
     x = list(result.keys())
     y = list(result.values())
-
-    plt.scatter(x, y)
-    plt.xlabel("Boundary")
-    plt.ylabel("Escaped")
-    plt.title("Fuite en fonction de la distance de détection")
-    plt.show()
-
+    if plot:
+        plt.scatter(x, y)
+        plt.xlabel("Boundary")
+        plt.ylabel("Escaped")
+        plt.title("Fuite en fonction de la distance de détection")
+        plt.show()
     # Print statistics
     print("Escaped count:", y.count(1))
     print("Eaten count:", y.count(0))
     print("Escape percentage:", y.count(1) / (y.count(1) + y.count(0)))
 
-    return result
+    return y.count(1) / (y.count(1) + y.count(0))
+
+
+def find_optimal_distance():
+    min_percentage = 1  
+    optimal_distance = 0
+
+    for distance in range(2, 201, 2):
+        print(f"Testing distance: {distance}")
+        escape_percentage = simulate_and_plot(distance_between_predators=distance, plot=False)
+        
+        if escape_percentage < min_percentage:
+            min_percentage = escape_percentage
+            optimal_distance = distance
+
+    print(f"Least optimal distance: {optimal_distance} with escape percentage: {min_percentage * 100:.2f}%")
+    return optimal_distance
